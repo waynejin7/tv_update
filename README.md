@@ -54,4 +54,4 @@ Invoke-RestMethod -Method Post -Uri 'http://电视IP:8765/api/v1/download' -Cont
 
 请离线保管同一份签名密钥的备份。Android 覆盖安装要求新旧 APK 签名一致。不要用 debug APK 安装后再尝试用 release APK 覆盖；首次真机安装应使用签名 release APK。
 
-仓库已配置 Actions Secrets，并成功发布签名版本 [v0.1.1](https://github.com/waynejin7/tv_update/releases/tag/v0.1.1)。APK 尚未在 TCL T7M 真机上验证。Windows 创建密钥的本机备份位于 `%APPDATA%\\tv_update-signing`：`tv-update.p12` 是签名密钥，`password.dpapi` 使用创建时的 Windows 用户配置文件加密。请保留这两个文件及对应 Windows 用户配置文件备份；丢失签名密钥后，已安装版本无法由新密钥签名的 APK 覆盖更新。
+仓库已配置 Actions Secrets，并成功发布签名版本 [v0.1.1](https://github.com/waynejin7/tv_update/releases/tag/v0.1.1)。APK 尚未在 TCL T7M 真机上验证。Windows 创建密钥的本机备份位于 `%APPDATA%\tv_update-signing`：`tv-update.p12` 是签名密钥，`password.dpapi` 使用创建时的 Windows 用户配置文件加密。请保留这两个文件及对应 Windows 用户配置文件备份；丢失签名密钥后，已安装版本无法由新密钥签名的 APK 覆盖更新。
