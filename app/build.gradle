@@ -1,0 +1,51 @@
+plugins { id 'com.android.application' }
+
+def releaseName = System.getenv('VERSION_NAME') ?: '0.1.0-dev'
+def releaseCode = (System.getenv('VERSION_CODE') ?: '1').toInteger()
+def selfRepo = System.getenv('SELF_REPO') ?: ''
+
+android {
+    namespace 'com.tvupdate.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.tvupdate.app'
+        minSdk 28
+        targetSdk 35
+        versionCode releaseCode
+        versionName releaseName
+        buildConfigField 'String', 'SELF_REPO', '"' + selfRepo + '"'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildFeatures { buildConfig true }
+
+    signingConfigs {
+        release {
+            def keyFile = System.getenv('SIGNING_KEYSTORE')
+            if (keyFile) {
+                storeFile file(keyFile)
+                storePassword System.getenv('SIGNING_STORE_PASSWORD')
+                keyAlias System.getenv('SIGNING_KEY_ALIAS')
+                keyPassword System.getenv('SIGNING_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}
