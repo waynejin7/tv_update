@@ -23,12 +23,12 @@ public final class ApkProvider extends ContentProvider {
         String name = uri.getLastPathSegment();
         if (!name.matches("[A-Za-z0-9_-]+\\.apk"))
             throw new FileNotFoundException("Invalid APK name");
-        File file = new File(requireContext().getFilesDir(), "apks/" + name);
+        File file = new File(safeContext().getFilesDir(), "apks/" + name);
         if (!file.isFile()) throw new FileNotFoundException("APK not found");
         return file;
     }
 
-    private android.content.Context requireContext() {
+    private android.content.Context safeContext() {
         android.content.Context context = getContext();
         if (context == null) throw new IllegalStateException("No context");
         return context;
